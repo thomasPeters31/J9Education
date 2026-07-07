@@ -7,11 +7,11 @@
 <style>
   :root{
     --background:#FFCEA1;
-    --navy-light:#FFE2C7;
+    --background-alt:#FFE2C7;
     --text:#802FD6;
-    --muted:#a9b7cf;
-    --panel:#0f2547;
-    --border:rgba(232,185,77,0.25);
+    --backup:#BACDFF;
+    --muted:rgba(128,47,214,0.6);
+    --border:rgba(128,47,214,0.18);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{
@@ -52,7 +52,7 @@
 
   /* --- Panel 1: About --- */
   #hero{
-    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+    background:linear-gradient(135deg,var(--background) 0%,var(--background-alt) 100%);
   }
   #hero .bg-symbol{ top:-2rem; right:-1rem; }
   .brand{
@@ -95,7 +95,7 @@
   .contact-strip .item b{ color:var(--text); }
 
   /* --- Panel 2: Pricing --- */
-  #pricing{ background:var(--panel); }
+  #pricing{ background:var(--background-alt); }
   #pricing .bg-symbol{ bottom:-3rem; left:-2rem; }
   h2.section-title{
     font-size:clamp(0.9rem,1.3vw,1.2rem);
@@ -126,7 +126,7 @@
   .price-note a{ color:var(--text); font-weight:600; text-decoration:none; }
 
   /* --- Panel 3: Course Schedule --- */
-  #schedule{ background:var(--navy-light); }
+  #schedule{ background:var(--background); }
   #schedule .bg-symbol{ top:-2rem; left:-1rem; }
   #schedule .sched-sub{
     font-size:clamp(0.63rem,0.85vw,0.74rem);
@@ -136,9 +136,9 @@
   }
   .term-tabs{ display:flex; gap:0.4rem; margin-bottom:0.6rem; }
   .tab-btn{
-    background:rgba(255,255,255,0.04);
+    background:rgba(255,255,255,0.4);
     border:1px solid var(--border);
-    color:var(--muted);
+    color:var(--text);
     padding:0.35rem 0.7rem;
     border-radius:999px;
     font-size:clamp(0.62rem,0.85vw,0.74rem);
@@ -146,7 +146,7 @@
     cursor:pointer;
     transition:all .15s ease;
   }
-  .tab-btn.active{ background:var(--text); color:var(--navy); border-color:var(--text); }
+  .tab-btn.active{ background:var(--backup); color:var(--text); border-color:var(--backup); }
   .term-content{ display:none; }
   .term-content.active{ display:block; }
   .tier-cols{ display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
@@ -175,11 +175,11 @@
   .tier-col li .date{ color:var(--muted); font-weight:600; margin-right:0.3rem; }
 
   /* --- Panel 4: Contact --- */
-  #contact{ background:var(--panel); }
+  #contact{ background:var(--background-alt); }
   #contact .bg-symbol{ bottom:-3rem; right:-2rem; }
   form{ display:flex; flex-direction:column; gap:0.5rem; margin-top:0.4rem; max-width:26rem; }
   input, textarea{
-    background:rgba(255,255,255,0.04);
+    background:rgba(255,255,255,0.55);
     border:1px solid var(--border);
     border-radius:8px;
     padding:0.5rem 0.7rem;
@@ -189,7 +189,7 @@
     resize:none;
   }
   input::placeholder, textarea::placeholder{ color:var(--muted); }
-  input:focus, textarea:focus{ outline:none; border-color:var(--text); }
+  input:focus, textarea:focus{ outline:none; border-color:var(--backup); }
   .btn{
     display:inline-block;
     padding:0.6rem 1.2rem;
@@ -202,7 +202,7 @@
     border:none;
   }
   .btn:hover{ transform:translateY(-2px); }
-  .btn-primary{ background:var(--text); color:var(--navy); box-shadow:0 6px 18px rgba(232,185,77,0.25); }
+  .btn-primary{ background:var(--backup); color:var(--text); box-shadow:0 6px 18px rgba(128,47,214,0.2); }
   .contact-info{
     display:flex;
     gap:1.1rem;
