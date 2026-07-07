@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J9 Education | Maths Tutoring</title>
+<style>
+  :root{
+    --navy:#0b1e3d;
+    --navy-light:#132a52;
+    --gold:#e8b94d;
+    --text:#eef2f8;
+    --muted:#a9b7cf;
+    --panel:#0f2547;
+    --border:rgba(232,185,77,0.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{
+    height:100%;
+    width:100%;
+    overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--navy);
+    color:var(--text);
+  }
+  body{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    height:100vh;
+    width:100vw;
+  }
+  section{
+    position:relative;
+    padding:clamp(1rem,3vw,2.5rem);
+    border:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .bg-symbol{
+    position:absolute;
+    font-size:12rem;
+    color:var(--gold);
+    opacity:0.05;
+    font-weight:700;
+    pointer-events:none;
+    user-select:none;
+    line-height:1;
+  }
+  /* --- Panel 1: Hero --- */
+  #hero{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+  }
+  #hero .bg-symbol{ top:-2rem; right:-1rem; }
+  .brand{
+    font-size:clamp(0.7rem,1vw,0.85rem);
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:0.75rem;
+    font-weight:600;
+  }
+  #hero h1{
+    font-size:clamp(1.6rem,3vw,2.6rem);
+    line-height:1.15;
+    margin-bottom:0.75rem;
+    font-weight:700;
+  }
+  #hero h1 span{ color:var(--gold); }
+  #hero p{
+    color:var(--muted);
+    font-size:clamp(0.85rem,1.2vw,1.05rem);
+    max-width:32rem;
+    margin-bottom:1.25rem;
+  }
+  .cta-row{ display:flex; gap:0.75rem; flex-wrap:wrap; }
+  .btn{
+    display:inline-block;
+    padding:0.65rem 1.3rem;
+    border-radius:999px;
+    font-size:0.85rem;
+    font-weight:600;
+    text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+    cursor:pointer;
+    border:none;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--gold); color:var(--navy); box-shadow:0 6px 18px rgba(232,185,77,0.25); }
+  .btn-outline{ background:transparent; color:var(--text); border:1px solid var(--border); }
+
+  /* --- Panel 2: Why / About --- */
+  #why{ background:var(--panel); }
+  #why .bg-symbol{ bottom:-3rem; left:-2rem; }
+  h2.section-title{
+    font-size:clamp(1rem,1.4vw,1.3rem);
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    margin-bottom:1rem;
+    font-weight:700;
+  }
+  .feature-list{ list-style:none; display:flex; flex-direction:column; gap:0.9rem; }
+  .feature-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:0.7rem;
+    font-size:clamp(0.8rem,1.05vw,0.95rem);
+    color:var(--muted);
+  }
+  .feature-list .icon{
+    flex:0 0 auto;
+    width:1.7rem; height:1.7rem;
+    border-radius:50%;
+    background:rgba(232,185,77,0.15);
+    color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem;
+    font-weight:700;
+  }
+  .feature-list strong{ color:var(--text); }
+
+  /* --- Panel 3: Subjects --- */
+  #subjects{ background:var(--navy-light); }
+  #subjects .bg-symbol{ top:-2rem; left:-1rem; }
+  .levels{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0.6rem;
+    margin-top:0.75rem;
+  }
+  .level-card{
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:0.7rem 0.85rem;
+  }
+  .level-card h3{
+    font-size:clamp(0.8rem,1.05vw,0.95rem);
+    color:var(--gold);
+    margin-bottom:0.3rem;
+  }
+  .level-card p{
+    font-size:clamp(0.68rem,0.85vw,0.8rem);
+    color:var(--muted);
+    line-height:1.4;
+  }
+
+  /* --- Panel 4: Contact --- */
+  #contact{ background:var(--panel); }
+  #contact .bg-symbol{ bottom:-3rem; right:-2rem; }
+  form{ display:flex; flex-direction:column; gap:0.6rem; margin-top:0.5rem; max-width:26rem; }
+  input, textarea{
+    background:rgba(255,255,255,0.04);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:0.55rem 0.75rem;
+    color:var(--text);
+    font-size:0.85rem;
+    font-family:inherit;
+    resize:none;
+  }
+  input::placeholder, textarea::placeholder{ color:var(--muted); }
+  input:focus, textarea:focus{ outline:none; border-color:var(--gold); }
+  .contact-info{
+    display:flex;
+    gap:1.2rem;
+    margin-top:0.9rem;
+    font-size:0.78rem;
+    color:var(--muted);
+    flex-wrap:wrap;
+  }
+  .contact-info b{ color:var(--text); display:block; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold); margin-bottom:0.15rem; }
+
+  .panel-label{
+    position:absolute;
+    top:0.9rem;
+    right:1.1rem;
+    font-size:0.65rem;
+    letter-spacing:0.2em;
+    color:var(--muted);
+    opacity:0.6;
+    text-transform:uppercase;
+  }
+
+  /* Small screens: allow scrolling instead of squeezing content unreadably */
+  @media (max-width:720px), (max-height:520px){
+    html,body{ overflow:auto; }
+    body{
+      display:block;
+      height:auto;
+    }
+    section{ min-height:100vh; border-width:0 0 1px 0; }
+  }
+</style>
+</head>
+<body>
+
+  <section id="hero">
+    <div class="bg-symbol">∑</div>
+    <span class="panel-label">01 · Welcome</span>
+    <div class="brand">J9 Education</div>
+    <h1>Maths tutoring that makes <span>numbers click.</span></h1>
+    <p>One-to-one and small-group tuition for KS3, GCSE and A-Level students, built around clear explanations, exam technique and steady confidence-building.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">Book a Free Consultation</a>
+      <a href="#subjects" class="btn btn-outline">See Subjects</a>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="bg-symbol">π</div>
+    <span class="panel-label">02 · Why Us</span>
+    <h2 class="section-title">Why Families Choose Us</h2>
+    <ul class="feature-list">
+      <li><span class="icon">✓</span><span><strong>Qualified & DBS-checked</strong> tutors with a track record of grade improvement.</span></li>
+      <li><span class="icon">✓</span><span><strong>Tailored lesson plans</strong> matched to each student's exam board and pace.</span></li>
+      <li><span class="icon">✓</span><span><strong>Regular progress reports</strong> shared directly with parents.</span></li>
+      <li><span class="icon">✓</span><span><strong>Flexible scheduling</strong> — online or in-person, evenings and weekends.</span></li>
+    </ul>
+  </section>
+
+  <section id="subjects">
+    <div class="bg-symbol">√</div>
+    <span class="panel-label">03 · Subjects</span>
+    <h2 class="section-title">Subjects & Levels</h2>
+    <div class="levels">
+      <div class="level-card">
+        <h3>KS3 Maths</h3>
+        <p>Foundations in number, algebra, geometry and statistics.</p>
+      </div>
+      <div class="level-card">
+        <h3>GCSE Maths</h3>
+        <p>Foundation & Higher tier, all major exam boards.</p>
+      </div>
+      <div class="level-card">
+        <h3>A-Level Maths</h3>
+        <p>Pure, Mechanics & Statistics — Year 12 & 13.</p>
+      </div>
+      <div class="level-card">
+        <h3>Further Maths</h3>
+        <p>Advanced pure & applied topics for top grades.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="bg-symbol">∞</div>
+    <span class="panel-label">04 · Contact</span>
+    <h2 class="section-title">Book a Free Consultation</h2>
+    <form onsubmit="event.preventDefault(); alert('Thanks! We will be in touch shortly.'); this.reset();">
+      <input type="text" placeholder="Parent / Student Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <textarea rows="2" placeholder="Which level & subject do you need help with?"></textarea>
+      <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Enquiry</button>
+    </form>
+    <div class="contact-info">
+      <div><b>Email</b>hello@j9education.co.uk</div>
+      <div><b>Phone</b>+44 7000 000000</div>
+      <div><b>Hours</b>Mon–Sat, 9am–8pm</div>
+    </div>
+  </section>
+
+</body>
+</html>
