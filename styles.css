@@ -1,0 +1,250 @@
+/* Brand palette: two backgrounds alternate across the 4 panels,
+   --text is used for headings/body copy, --backup is the accent
+   used only on interactive controls (buttons, active tab, focus rings). */
+:root{
+  --background:#FFCEA1;
+  --background-alt:#FFE2C7;
+  --text:#802FD6;
+  --backup:#BACDFF;
+  --muted:rgba(128,47,214,0.6);
+  --border:rgba(128,47,214,0.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  height:100%;
+  width:100%;
+  overflow:hidden; /* the whole point of the layout: nothing scrolls */
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--background);
+  color:var(--text);
+}
+/* Column stack: the 4-panel grid on top, contact bar pinned along the bottom */
+body{
+  display:flex;
+  flex-direction:column;
+  height:100vh;
+  width:100vw;
+}
+/* 2x2 grid filling all remaining space above the contact bar */
+main.panels{
+  flex:1 1 auto;
+  min-height:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+}
+section{
+  position:relative;
+  padding:clamp(0.9rem,2.6vw,2.2rem);
+  border:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+}
+/* Oversized faint maths symbol watermark, one per panel, positioned via each #id.bg-symbol rule below */
+.bg-symbol{
+  position:absolute;
+  font-size:12rem;
+  color:var(--text);
+  opacity:0.05;
+  font-weight:700;
+  pointer-events:none;
+  user-select:none;
+  line-height:1;
+}
+a{ color:inherit; }
+
+/* --- Panel 1: About --- */
+#hero{ background:var(--background); }
+#hero .bg-symbol{ top:-2rem; right:-1rem; }
+.brand{
+  font-size:clamp(0.65rem,0.95vw,0.8rem);
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--text);
+  margin-bottom:0.6rem;
+  font-weight:600;
+}
+#hero h1{
+  font-size:clamp(1.3rem,2.4vw,2.1rem);
+  line-height:1.15;
+  margin-bottom:0.5rem;
+  font-weight:700;
+}
+#hero h1 span{ color:var(--text); }
+#hero .tagline{
+  font-size:clamp(0.7rem,1vw,0.85rem);
+  color:var(--text);
+  font-weight:600;
+  margin-bottom:0.6rem;
+}
+#hero p.about{
+  color:var(--muted);
+  font-size:clamp(0.72rem,1.05vw,0.88rem);
+  max-width:34rem;
+  line-height:1.5;
+  margin-bottom:0.9rem;
+}
+
+/* --- Panel 2: Pricing --- */
+#pricing{ background:var(--background-alt); }
+#pricing .bg-symbol{ bottom:-3rem; left:-2rem; }
+h2.section-title{
+  font-size:clamp(0.9rem,1.3vw,1.2rem);
+  color:var(--text);
+  text-transform:uppercase;
+  letter-spacing:0.13em;
+  margin-bottom:0.8rem;
+  font-weight:700;
+}
+.price-list{ display:flex; flex-direction:column; gap:0.55rem; }
+.price-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:0.6rem;
+  border-bottom:1px dashed var(--border);
+  padding-bottom:0.45rem;
+  font-size:clamp(0.72rem,1vw,0.85rem);
+}
+.price-row .label{ color:var(--text); font-weight:600; }
+.price-row .sub{ display:block; color:var(--muted); font-weight:400; font-size:0.9em; margin-top:0.1rem; }
+.price-row .amount{ color:var(--text); font-weight:700; white-space:nowrap; }
+/* Nested under the "Online revision course" row, so pulled in and de-emphasised
+   rather than reading as their own top-level price rows */
+.price-subrows{
+  display:flex;
+  flex-direction:column;
+  gap:0.3rem;
+  margin:-0.25rem 0 0.55rem 0.9rem;
+  padding-bottom:0.45rem;
+  border-bottom:1px dashed var(--border);
+}
+.price-subrow{
+  display:flex;
+  justify-content:space-between;
+  gap:0.6rem;
+  font-size:clamp(0.66rem,0.92vw,0.78rem);
+  color:var(--muted);
+}
+.price-subrow span:first-child{ color:var(--text); font-weight:600; }
+.price-note{
+  margin-top:0.7rem;
+  font-size:clamp(0.65rem,0.9vw,0.76rem);
+  color:var(--muted);
+}
+.price-note a{ color:var(--text); font-weight:600; text-decoration:none; }
+
+/* --- Panel 3: Course Schedule --- */
+#schedule{ background:var(--background-alt); }
+#schedule .bg-symbol{ top:-2rem; left:-1rem; }
+#schedule .sched-sub{
+  font-size:clamp(0.63rem,0.85vw,0.74rem);
+  color:var(--muted);
+  margin-bottom:0.6rem;
+  margin-top:-0.4rem;
+}
+/* Term 1 / Term 2 schedules are toggled via JS rather than shown together —
+   both terms' full 2-tier date lists don't fit one panel without scrolling */
+.term-tabs{ display:flex; gap:0.4rem; margin-bottom:0.6rem; }
+.tab-btn{
+  background:rgba(255,255,255,0.4);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:0.35rem 0.7rem;
+  border-radius:999px;
+  font-size:clamp(0.62rem,0.85vw,0.74rem);
+  font-weight:600;
+  cursor:pointer;
+  transition:all .15s ease;
+}
+.tab-btn.active{ background:var(--backup); color:var(--text); border-color:var(--backup); }
+.term-content{ display:none; }
+.term-content.active{ display:block; }
+.tier-cols{ display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
+.tier-col h3{
+  font-size:clamp(0.72rem,1vw,0.85rem);
+  color:var(--text);
+  margin-bottom:0.1rem;
+}
+.tier-col .time{
+  font-size:clamp(0.6rem,0.8vw,0.7rem);
+  color:var(--muted);
+  margin-bottom:0.35rem;
+  display:block;
+}
+.tier-col ol{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:0.22rem;
+}
+.tier-col li{
+  font-size:clamp(0.6rem,0.8vw,0.71rem);
+  color:var(--text);
+  line-height:1.35;
+}
+.tier-col li .date{ color:var(--muted); font-weight:600; margin-right:0.3rem; }
+
+/* --- Panel 4: Quotes --- */
+#quotes{ background:var(--background); }
+#quotes .bg-symbol{ bottom:-5rem; right:-1rem; font-size:18rem; }
+.quote-list{ display:flex; flex-direction:column; gap:1rem; }
+.quote{
+  background:rgba(255,255,255,0.4);
+  border-left:3px solid var(--backup);
+  border-radius:8px;
+  padding:0.7rem 0.9rem;
+}
+.quote p{
+  font-size:clamp(0.72rem,1vw,0.86rem);
+  line-height:1.5;
+  color:var(--text);
+  font-style:italic;
+  margin-bottom:0.4rem;
+}
+.quote cite{
+  display:block;
+  font-size:clamp(0.68rem,0.9vw,0.78rem);
+  font-style:normal;
+  font-weight:700;
+  color:var(--muted);
+}
+
+.panel-label{
+  position:absolute;
+  top:0.85rem;
+  right:1.05rem;
+  font-size:0.62rem;
+  letter-spacing:0.2em;
+  color:var(--muted);
+  opacity:0.6;
+  text-transform:uppercase;
+}
+
+/* Bottom contact bar: the single source of contact info for the whole page */
+.contact-bar{
+  flex:0 0 auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1.6rem;
+  flex-wrap:wrap;
+  padding:0.55rem 1rem;
+  background:var(--backup);
+  color:var(--text);
+  font-size:clamp(0.68rem,0.95vw,0.82rem);
+}
+.contact-bar .item{ display:flex; align-items:center; gap:0.4rem; }
+.contact-bar a{ color:var(--text); text-decoration:none; }
+.contact-bar b{ text-transform:uppercase; letter-spacing:0.08em; font-size:0.85em; opacity:0.8; }
+
+/* Small screens: allow scrolling instead of squeezing content unreadably */
+@media (max-width:760px), (max-height:560px){
+  html,body{ overflow:auto; }
+  body{ display:block; height:auto; }
+  main.panels{ display:block; }
+  section{ min-height:100vh; border-width:0 0 1px 0; }
+  .tier-cols{ grid-template-columns:1fr; }
+}
