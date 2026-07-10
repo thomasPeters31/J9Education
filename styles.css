@@ -255,11 +255,12 @@ h2.section-title{
 .contact-bar a{ color:var(--text); text-decoration:none; }
 .contact-bar b{ text-transform:uppercase; letter-spacing:0.08em; font-size:0.85em; opacity:0.8; }
 
-/* Small screens: allow scrolling instead of squeezing content unreadably */
+/* Small screens: stack panels and size each to its own content instead of
+   forcing every panel to fill the full screen height (which left huge empty gaps) */
 @media (max-width:760px), (max-height:560px){
   html,body{ overflow:auto; }
   body{ display:block; height:auto; }
   main.panels{ display:block; }
-  section{ min-height:100vh; border-width:0 0 1px 0; }
+  section{ height:auto; min-height:0; padding:1.5rem 1.25rem; border-width:0 0 1px 0; }
   .tier-cols{ grid-template-columns:1fr; }
 }
